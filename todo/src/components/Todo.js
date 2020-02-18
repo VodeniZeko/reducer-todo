@@ -2,7 +2,7 @@ import React, { useState, useReducer } from "react";
 import { reducer, initialState } from "../reducers/TodoReducer";
 import "./Todo.css";
 
-const Todo = props => {
+const Todo = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [text, setText] = useState();
   console.log(state);
