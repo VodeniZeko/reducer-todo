@@ -1,18 +1,33 @@
 export const initialState = {
-  todos: ["Learn about reducers"],
-  text: "",
-  completed: false,
-  id: 3892987589
+  todos: []
 };
 
-export const todoReducer = (state, action) => {
+export function reducer(state, action) {
   switch (action.type) {
-    case "add-todo":
+    case "ADD_TODO":
       return {
-        ...state,
-        todos: [...state.todos, action.text]
+        todos: [
+          ...state.todos,
+          {
+            text: action.text,
+            completed: false,
+            id: new Date().toLocaleTimeString()
+          }
+        ]
+      };
+    case "TOGGLE_TODO":
+      return {
+        todos: state.todos.map((todo, index) =>
+          index === action.index
+            ? { ...todo, completed: !todo.completed }
+            : todo
+        )
+      };
+    case "DELETE_TODO":
+      return {
+        todos: state.todos.filter(todo => !todo.completed)
       };
     default:
       return state;
   }
-};
+}
